@@ -47,7 +47,7 @@
                 isort.enable = true;
               };
               packages = [
-                (pkgs.python3.withPackages (ps: with ps; [
+                (pkgs.python39.withPackages (ps: with ps; [
                   pip
                   isort
                   black
