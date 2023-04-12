@@ -58,6 +58,12 @@
                 pkgs.hatch
               ];
             }
+            {
+              packages = [
+                pkgs.azure-cli
+                pkgs.azure-functions-core-tools
+              ];
+            }
           ];
         };
       }
