@@ -1,29 +1,34 @@
-import azure.durable_functions as df
+import logging
+
 import azure.functions as func
 
-myApp = df.DFApp(http_auth_level=func.AuthLevel.ANONYMOUS)
+app = func.FunctionApp()
 
-# An HTTP-Triggered Function with a Durable Functions Client binding
-@myApp.route(route="orchestrators/{functionName}")
-@myApp.durable_client_input(client_name="client")
-async def http_start(req: func.HttpRequest, client):
-    function_name = req.route_params.get("functionName")
-    instance_id = await client.start_new(function_name)
-    response = client.create_check_status_response(req, instance_id)
-    return response
+# Learn more at aka.ms/pythonprogrammingmodel
+
+# Get started by running the following code to create a function using a HTTP trigger.
 
 
-# Orchestrator
-@myApp.orchestration_trigger(context_name="context")
-def hello_orchestrator(context):
-    result1 = yield context.call_activity("hello", "Seattle")
-    result2 = yield context.call_activity("hello", "Tokyo")
-    result3 = yield context.call_activity("hello", "London")
+@app.function_name(name="HttpTrigger1")
+@app.route(route="hello", auth_level=func.AuthLevel.ANONYMOUS)
+def test_function(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info("Python HTTP trigger function processed a request.")
 
-    return [result1, result2, result3]
+    name = req.params.get("name")
+    if not name:
+        try:
+            req_body = req.get_json()
+        except ValueError:
+            pass
+        else:
+            name = req_body.get("name")
 
-
-# Activity
-@myApp.activity_trigger(input_name="city")
-def hello(city: str):
-    return "Hello " + city
+    if name:
+        return func.HttpResponse(
+            f"Hello, {name}. This HTTP triggered function executed successfully."
+        )
+    else:
+        return func.HttpResponse(
+            "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
+            status_code=200,
+        )
