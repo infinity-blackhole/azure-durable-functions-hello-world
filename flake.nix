@@ -36,6 +36,7 @@
               };
               packages = [
                 pkgs.nixpkgs-fmt
+                pkgs.docker
                 pkgs.nodejs
               ];
             }
