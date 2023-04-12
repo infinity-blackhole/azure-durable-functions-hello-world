@@ -33,11 +33,9 @@
                 nixpkgs-fmt.enable = true;
                 statix.enable = true;
                 deadnix.enable = true;
-                hadolint.enable = true;
               };
               packages = [
                 pkgs.nixpkgs-fmt
-                pkgs.docker
                 pkgs.nodejs
               ];
             }
@@ -51,11 +49,7 @@
                   pip
                   isort
                   black
-                  hatchling
                 ]))
-              ] ++ pkgs.lib.optionals pkgs.stdenv.isLinux [
-                # TODO: https://github.com/NixOS/nixpkgs/issues/209358
-                pkgs.hatch
               ];
             }
             {
