@@ -6,14 +6,8 @@
 # - add azure-functions-durable to requirements.txt
 # - run pip install -r requirements.txt
 
-import ray
 from ray import workflow
 
 
-@ray.remote
-def hello(name: str) -> str:
-    return f"Hello {name} from Ray!"
-
-
-def main(name: str, workflow_id: str):
-    workflow.run_async(hello.bind(name), workflow_id=workflow_id)
+def main(workflow_id: str):
+    return workflow.get_output(workflow_id)

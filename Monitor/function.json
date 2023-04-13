@@ -2,12 +2,7 @@
   "scriptFile": "__init__.py",
   "bindings": [
     {
-      "name": "name",
-      "type": "activityTrigger",
-      "direction": "in"
-    },
-    {
-      "name": "workfow_id",
+      "name": "workflow_id",
       "type": "activityTrigger",
       "direction": "in"
     }

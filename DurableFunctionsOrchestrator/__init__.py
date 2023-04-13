@@ -7,13 +7,16 @@
 # - run pip install -r requirements.txt
 
 import azure.durable_functions as df
+import ray
+
+ray.init()
 
 
 def orchestrator_function(context: df.DurableOrchestrationContext):
     result1 = yield context.call_activity("Hello", "Tokyo")
     result2 = yield context.call_activity("Hello", "Seattle")
     result3 = yield context.call_activity("Hello", "London")
-    return [result1, result2, result3]
+    return context.call_activity("Monitor", [result1, result2, result3])
 
 
 main = df.Orchestrator.create(orchestrator_function)
