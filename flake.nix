@@ -35,6 +35,7 @@
                 deadnix.enable = true;
               };
               packages = [
+                pkgs.stdenv.cc.cc.lib
                 pkgs.nixpkgs-fmt
                 pkgs.docker
                 pkgs.nodejs
