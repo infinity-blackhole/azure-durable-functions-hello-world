@@ -2,6 +2,7 @@
 # The Python Worker is managed by Azure Functions platform
 # Manually managing azure-functions-worker may cause unexpected issues
 
-azure-functions
-azure-functions-durable
-ray
+azure-functions>=1.13,<2.0
+azure-functions-durable>=1.2,<2.0
+ray>=2.3,<3.0
+protobuf>=3.20,<3.21
