@@ -6,18 +6,6 @@
 # - add azure-functions-durable to requirements.txt
 # - run pip install -r requirements.txt
 
-import ray
-
-ray.init()
-
-
-@ray.remote
-def hello(name: str) -> str:
-    return f"Hello {name} from Ray!"
-
 
 def main(name: str):
-    hello_object_ref = hello.remote(name)
-    if hello_object_ref is None:
-        raise TypeError("hello_object_ref is None")
-    return ray.get(hello_object_ref)
+    return f"Hello {name}!"
