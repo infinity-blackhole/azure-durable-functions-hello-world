@@ -16,7 +16,7 @@
   "extensions": {
     "durableTask": {
       "storageProvider": {
-        "type": "AzureStorage"
+        "type": "Netherite"
       }
     }
   }
